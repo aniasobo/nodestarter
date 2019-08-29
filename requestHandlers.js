@@ -1,6 +1,7 @@
 var exec = require("child_process").exec;
+var querystring = require("querystring");
 
-function start(response) {
+function start(response, postData) {
   console.log("Request handler START was called");
 
   var body = '<html>' +
@@ -22,10 +23,10 @@ function start(response) {
   
 }
 
-function upload(response) {
+function upload(response, postData) {
   console.log("Request handler UPLOAD was called")
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello Upload");
+  response.write("Sent content: " + querystring.parse(postData).text);
   response.end();
 }
 
